@@ -34,7 +34,7 @@ module Hubspot
       results = JSON.parse(search_response.body)
       physical_address =  user["Addresses"][1]
       postal_address = user["Addresses"][0]
-      salesperson = user["SalesPerson"]["FullName"] + ": " + user["SalesPerson"]["Email"]
+      salesperson = user["SalesPerson"]["FullName"] + ": " + user["SalesPerson"]["Email"] rescue nil
     
       
   
