@@ -11,7 +11,6 @@ module Unleashed
       endpoint << "/#{params[:Page]}" if params[:Page].present?
       response = JSON.parse(@@client.get(endpoint, params).body)
       customers = response.key?('Items') ? response['Items'] : []
-      binding.pry
       customers.each do |user|
         Hubspot::Company.create_update(user) 
       end
