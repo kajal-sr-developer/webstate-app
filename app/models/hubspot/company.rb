@@ -112,5 +112,26 @@ module Hubspot
         end
       end
     end
+
+    def self.find_by_customer_code(customer_code)
+       body_json =
+          {
+        "filterGroups":[
+          {
+            "filters":[
+              {
+                "propertyName": "customer_code",
+                "operator": "EQ",
+                "value": "#{customer_code}"
+              }
+            ]
+          }
+        ]
+      }
+      response = HTTParty.post("#{COMPANY_PATH}/search",:body=> body_json.to_json, :headers => {
+           "Content-Type" => "application/json","Authorization" => "Bearer #{ENV['HUBSPOT_API_KEY']}"
+         })
+      return response
+    end
   end
 end

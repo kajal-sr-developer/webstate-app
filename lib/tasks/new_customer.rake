@@ -3,5 +3,7 @@ namespace :new_customer do
   task create: :environment do
     Unleashed::ManualCustomer.all
     puts "Create new customer"
+    Unleashed::ManualQuote.all
+    puts "Create new quote"
   end
 end
