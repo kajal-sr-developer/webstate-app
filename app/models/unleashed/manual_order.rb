@@ -2,9 +2,8 @@ module Unleashed
   class ManualOrder < Base
 
     def self.all
-        date = ((Time.now-2.years).utc).strftime('%F')
-       for i in 5..190
-        options = { Page: i,pageSize: 50,startDate: date,modifiedSince: date}
+        date = ((Time.now-15.minutes).utc).strftime('%F')
+        options = { Page: 1, pageSize: 50, startDate: date, modifiedSince: date}
         endpoint = 'SalesOrders'
         params = options.dup
         # Handle Page option
@@ -14,8 +13,6 @@ module Unleashed
         sales.each do |quote|
           Hubspot::Deal.create_update_sales_deal(quote)
         end
-         puts "page ================#{i}========================= done"
-      end
 
         # sales.each do |sale|
         #   begin
