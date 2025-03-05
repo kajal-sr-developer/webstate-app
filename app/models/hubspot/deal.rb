@@ -13,7 +13,7 @@ module Hubspot
       deal_name = quote["QuoteNumber"] rescue "--"
        if quote["QuoteStatus"]=="Pending"
         hs_stage = 'presentationscheduled'
-      elsif quote["QuoteStatus"] == "Cancelled" || quote["QuoteStatus"] == " Deleted"
+      elsif quote["QuoteStatus"] == "Cancelled" || quote["QuoteStatus"] == "Deleted"
         hs_stage = 'contractsent'
       elsif quote["QuoteStatus"] == "Open" || quote["QuoteStatus"] == "Draft"
          hs_stage = 'appointmentscheduled'
@@ -85,6 +85,7 @@ module Hubspot
       requireddate =  Time.at((sale["saleExpiryDate"].split('(').last.gsub(')/','')).to_i/1000, in: "UTC").midnight rescue nil
       created_on =  Time.at((sale["CreatedOn"].split('(').last.gsub(')/','')).to_i/1000, in: "UTC").midnight rescue nil
       salesperson = sale["SalesPerson"]["FullName"] + ": " + sale["SalesPerson"]["Email"] rescue nil
+      complete_date =  Time.at((sale["CompletedDate"].split('(').last.gsub(')/','')).to_i/1000, in: "UTC").midnight rescue nil
       deal_name = sale["OrderNumber"] rescue "--"
        if sale["OrderStatus"]=="Open"
         hs_stage = '969781838'
@@ -128,7 +129,8 @@ module Hubspot
           dealname: deal_name,
           pipeline: "659954245",
           dealstage: hs_stage,
-          amount: sale['SubTotal']
+          amount: sale['SubTotal'],
+          completedate:  complete_date
         }
       }
 
