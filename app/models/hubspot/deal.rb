@@ -17,8 +17,10 @@ module Hubspot
         hs_stage = 'contractsent'
       elsif quote["QuoteStatus"] == "Deleted"
         hs_stage = 'closedwon'
-      elsif quote["QuoteStatus"] == "Open" || quote["QuoteStatus"] == "Draft"
-         hs_stage = 'appointmentscheduled'
+      elsif quote["QuoteStatus"] == "Open"  
+        hs_stage = 'appointmentscheduled'
+      elsif quote["QuoteStatus"] == "Draft"
+        hs_stage = 'qualifiedtobuy'
       elsif quote["QuoteStatus"] == "Accepted"
         hs_stage = '965389987'
       else
