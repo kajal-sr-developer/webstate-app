@@ -13,8 +13,10 @@ module Hubspot
       deal_name = quote["QuoteNumber"] rescue "--"
        if quote["QuoteStatus"]=="Pending"
         hs_stage = 'presentationscheduled'
-      elsif quote["QuoteStatus"] == "Cancelled" || quote["QuoteStatus"] == "Deleted"
+      elsif quote["QuoteStatus"] == "Cancelled" 
         hs_stage = 'contractsent'
+      elsif quote["QuoteStatus"] == "Deleted"
+        hs_stage = 'closedwon'
       elsif quote["QuoteStatus"] == "Open" || quote["QuoteStatus"] == "Draft"
          hs_stage = 'appointmentscheduled'
       elsif quote["QuoteStatus"] == "Accepted"
